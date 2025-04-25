@@ -11,8 +11,20 @@ namespace ColdProductionCalculator.ViewModels;
 
 public class MainViewModel : INotifyPropertyChanged
 {
-    public event PropertyChangedEventHandler? PropertyChanged;
-    private void OnPropertyChanged(string name) => PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+    private string _result;
+    public string Result
+    {
+        get => _result;
+        set
+        {
+            _result = value;
+            OnPropertyChanged(nameof(Result));
+        }
+    }
+
+    public event PropertyChangedEventHandler PropertyChanged;
+    protected void OnPropertyChanged(string propertyName) =>
+        PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
 
     public ObservableCollection<CalculationResult> History { get; set; } = new(JsonStorage.LoadHistory());
 

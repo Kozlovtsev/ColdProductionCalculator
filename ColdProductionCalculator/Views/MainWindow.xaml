@@ -20,7 +20,7 @@
             <TextBox Text="{Binding CowCount}" Width="200"/>
             <TextBlock Text="Удой (л/сут):"/>
             <TextBox Text="{Binding MilkPerCow}" Width="200"/>
-            <TextBlock Text="Температура (°C):"/>
+            <TextBlock Text="Конечная температура (°C):"/>
             <TextBox Text="{Binding FinalTemp}" Width="200"/>
             <TextBlock Text="Мощность компрессора (кВт):"/>
             <TextBox Text="{Binding PowerKw}" Width="200"/>
