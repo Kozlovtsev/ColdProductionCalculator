@@ -1,0 +1,47 @@
+<Window x:Class="ColdProductionCalculator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:vm="clr-namespace:ColdProductionCalculator.ViewModels"
+        xmlns:lvc="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        xmlns:lvc1="clr-namespace:LiveChartsCore.SkiaSharpView.WPF;assembly=LiveChartsCore.SkiaSharpView.WPF"
+        Title="Холодопроизводительность" Height="700" Width="900">
+
+
+    <Grid Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <!-- Ввод -->
+        <StackPanel Grid.Row="0" Margin="0,0,0,10">
+            <TextBlock Text="Количество коров:"/>
+            <TextBox Text="{Binding CowCount}" Width="200"/>
+            <TextBlock Text="Удой (л/сут):"/>
+            <TextBox Text="{Binding MilkPerCow}" Width="200"/>
+            <TextBlock Text="Температура (°C):"/>
+            <TextBox Text="{Binding FinalTemp}" Width="200"/>
+            <TextBlock Text="Мощность компрессора (кВт):"/>
+            <TextBox Text="{Binding PowerKw}" Width="200"/>
+            <TextBlock Text="Время работы (часы):"/>
+            <TextBox Text="{Binding WorkHours}" Width="200"/>
+
+            <Button Content="Рассчитать" Command="{Binding CalculateCommand}" Margin="0,10"/>
+        </StackPanel>
+
+        <!-- Результат -->
+        <StackPanel Grid.Row="1" Margin="0,0,0,20">
+            <TextBlock Text="Результат расчёта:" FontWeight="Bold"/>
+            <TextBlock Text="{Binding Qt, StringFormat='Qt: {0:F2} кДж'}"/>
+            <TextBlock Text="{Binding Qp, StringFormat='Qp: {0:F2} кДж'}"/>
+            <TextBlock Text="{Binding Energy, StringFormat='Энергия: {0:F2} кВт·ч'}"/>
+            <Button Content="Экспортировать в PDF" Command="{Binding ExportToPdfCommand}" Margin="0,10"/>
+            <Button Content="История расчётов" Click="OpenHistory_Click" />
+        </StackPanel>
+
+        <!-- График -->
+        <lvc:CartesianChart Grid.Row="2" Series="{Binding ChartSeries}" 
+                            XAxes="{Binding XAxes}" YAxes="{Binding YAxes}" />
+    </Grid>
+</Window>
